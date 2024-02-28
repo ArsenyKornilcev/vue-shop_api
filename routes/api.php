@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,11 @@ Route::post('/auth', [UserController::class, 'authenticate']);
 
 Route::post('/reg', [UserController::class, 'register']);
 
+Route::get('/products', [ProductController::class, 'all']);
+
 Route::group(['middleware' => 'admin'], function() {
     // routes that should be accessible only by admins
+    Route::delete('/product-delete', [ProductController::class, 'delete']);
+    Route::post('/product-create', [ProductController::class, 'create']);
+    Route::post('/product-update', [ProductController::class, 'update']);
 });

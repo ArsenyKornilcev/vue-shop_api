@@ -43,4 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function create(array $data)
+    {
+        return static::query()->create($data);
+    }
 }

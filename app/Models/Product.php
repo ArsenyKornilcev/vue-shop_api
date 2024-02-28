@@ -15,4 +15,9 @@ class Product extends Model
         'price',
         'imgSrc',
     ];
+
+    public static function create(array $data)
+    {
+        return static::query()->create($data);
+    }
 }

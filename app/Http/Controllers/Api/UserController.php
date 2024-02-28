@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -26,8 +26,8 @@ class UserController extends Controller
     {
         $credentials = $request->only('name', 'email', 'password');
 
-        $validator = FacadesValidator::make($credentials, [
-            'name' => 'required|string|unique|max:255',
+        $validator = Validator::make($credentials, [
+            'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
